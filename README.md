@@ -1,4 +1,4 @@
-# Playwright Registration Automation
+<!-- # Playwright Registration Automation
 
 A TypeScript Playwright framework for end-to-end registration form tests. It uses a Page Object Model, Faker-generated test data, and an optional Google Chat run reporter.
 
@@ -52,4 +52,178 @@ playwright.config.ts       Test discovery, browser, reporting, and failure artif
 reporters/googleChatReporter.ts  Optional Google Chat completion notification
 ```
 
-The registration tests define their page fixture in the spec. The HTML report, test results, and `node_modules` are generated/local folders and are excluded from Git.
+The registration tests define their page fixture in the spec. The HTML report, test results, and `node_modules` are generated/local folders and are excluded from Git. -->
+
+
+# Playwright Automation Framework
+
+A reusable end-to-end test automation framework built with **Playwright and TypeScript**, following the Page Object Model (POM) design pattern.
+
+The project demonstrates registration form automation, dynamic test data generation, reusable page actions, environment-based configuration, and automated test reporting.
+
+## Tech Stack
+
+- Playwright
+- TypeScript
+- Node.js and npm
+- Page Object Model (POM)
+- Faker.js
+- Google Chat Webhook Integration
+
+## Key Features
+
+- **Page Object Model:** Separates page locators and actions from test scenarios.
+- **Reusable Components:** Shared browser navigation and page-level functionality.
+- **Dynamic Test Data:** Generates registration data using Faker.
+- **Environment Configuration:** Reads application URLs from environment variables.
+- **Execution Evidence:** Attaches full-page screenshots and browser logs to the HTML report.
+- **Google Chat Notifications:** Sends test execution summaries to a configured Google Chat space.
+- **Multiple Execution Modes:** Supports headed, UI, debug, and standard test execution.
+
+## Project Structure
+
+```text
+playwright-automation-framework/
+│
+├── .github/
+│   └── agents/
+│
+├── config/
+│   └── testConfig.ts
+│
+├── pages/
+│   ├── BasePage.ts
+│   └── RegistrationPage.ts
+│
+├── reporters/
+│   └── googleChatReporter.ts
+│
+├── tests/
+│   └── registration.spec.ts
+│
+├── utils/
+│   ├── EnvReader.ts
+│   └── registrationData.ts
+│
+├── .env.example
+├── .gitignore
+├── package.json
+├── package-lock.json
+├── playwright.config.ts
+├── tsconfig.json
+└── README.md
+```
+
+## Prerequisites
+
+- Node.js 20 or newer
+- npm
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/Charan-Abhinav-Pyd/playwright-automation-framework.git
+cd playwright-automation-framework
+```
+
+Install dependencies:
+
+```bash
+npm install
+```
+
+Install Chromium:
+
+```bash
+npx playwright install chromium
+```
+
+## Environment Configuration
+
+Configure the following environment variables:
+
+```env
+BASE_URL=your_application_base_url
+REGISTRATION_URL=your_registration_page_url
+GOOGLE_CHAT_WEBHOOK_URL=your_google_chat_webhook
+```
+
+Keep actual credentials and webhook URLs in your local environment. Never commit them to GitHub.
+
+## Test Execution
+
+Run all tests:
+
+```bash
+npm test
+```
+
+Run tests in headed mode:
+
+```bash
+npm run test:headed
+```
+
+Run using Playwright UI mode:
+
+```bash
+npm run test:ui
+```
+
+Run in debug mode:
+
+```bash
+npm run test:debug
+```
+
+Run TypeScript type checking:
+
+```bash
+npm run typecheck
+```
+
+Run the registration suite specifically:
+
+```bash
+npx playwright test tests/registration.spec.ts --headed --workers=1 --retries=0
+```
+
+## Test Reports
+
+After test execution, open the HTML report:
+
+```bash
+npm run report
+```
+
+The registration tests attach full-page screenshots and browser execution logs to the report for both successful and failed executions.
+
+## Google Chat Integration
+
+The framework supports optional Google Chat notifications after test execution.
+
+Configure `GOOGLE_CHAT_WEBHOOK_URL` using a secure environment variable or CI secret.
+
+The notification provides:
+- Overall execution status
+- Passed test count
+- Failed test count
+- Skipped test count
+- Not-run test count
+- Report location or configured report URL
+
+## Framework Design
+
+The framework follows a modular design:
+
+- **Configuration Layer:** Manages application URLs and environment settings.
+- **Page Layer:** Contains reusable page objects and browser actions.
+- **Test Layer:** Contains registration scenarios and assertions.
+- **Utility Layer:** Handles environment reading and test data generation.
+- **Reporting Layer:** Produces execution evidence and Google Chat notifications.
+
+## Repository
+
+GitHub: https://github.com/Charan-Abhinav-Pyd/playwright-automation-framework
